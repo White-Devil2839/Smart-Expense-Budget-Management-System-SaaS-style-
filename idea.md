@@ -65,11 +65,13 @@ PostgreSQL Database   ← Persistent storage
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React.js, Axios |
-| Backend | Spring Boot (Java 17) |
-| ORM | Spring Data JPA (Hibernate) |
-| Database | PostgreSQL |
-| Authentication | Spring Security + JWT |
-| Build Tool | Maven |
+| Backend | Node.js, Express.js |
+| Language | TypeScript (strict mode) |
+| ODM | Mongoose |
+| Database | MongoDB |
+| Authentication | JWT (jsonwebtoken) |
+| Password Hashing | bcryptjs |
+| Runtime | ts-node-dev (dev), Node.js (prod) |
 | API Style | RESTful JSON |
 | Version Control | Git + GitHub |
 
