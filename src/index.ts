@@ -15,7 +15,12 @@ dotenv.config();
 const app: Application = express();
 
 // ── Middleware ──────────────────────────────────────────
-app.use(cors());
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173').split(',');
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 app.use(express.json());
 
 // ── Health Check ────────────────────────────────────────
