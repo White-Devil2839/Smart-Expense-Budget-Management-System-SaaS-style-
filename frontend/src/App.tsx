@@ -1,8 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import Expenses from './pages/Expenses';
+import Budgets from './pages/Budgets';
+import Categories from './pages/Categories';
 
 function App() {
   return (
@@ -13,20 +18,21 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Protected routes (dashboard will be added next phase) */}
+          {/* Protected routes with shared layout */}
           <Route
-            path="/dashboard"
             element={
               <ProtectedRoute>
-                <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-                  <h1>Dashboard</h1>
-                  <p>You are logged in! Expense management coming in Phase 3.</p>
-                </div>
+                <Layout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/budgets" element={<Budgets />} />
+            <Route path="/categories" element={<Categories />} />
+          </Route>
 
-          {/* Redirect root to login */}
+          {/* Fallback */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>

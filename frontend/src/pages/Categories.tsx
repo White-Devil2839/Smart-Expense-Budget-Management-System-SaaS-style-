@@ -1,0 +1,8 @@
+export default function Categories() {
+  return (
+    <div>
+      <h2>Manage Categories</h2>
+      <p>Admin category management will appear here.</p>
+    </div>
+  );
+}
