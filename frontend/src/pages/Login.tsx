@@ -33,53 +33,57 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '4rem auto' }}>
-      <h2>Login</h2>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
+      <div className="card animate-fade-in" style={{ width: '100%', maxWidth: '420px', padding: '2.5rem', position: 'relative' }}>
+        <Link to="/" style={{ position: 'absolute', top: '1rem', left: '1rem', fontSize: '0.85rem', color: 'var(--text-muted)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          ← Home
+        </Link>
+        <h2 style={{ textAlign: 'center', marginBottom: '2rem', marginTop: '0.5rem' }}>Welcome Back</h2>
 
-      {error && (
-        <div style={{ color: 'white', background: '#d32f2f', padding: '0.5rem 1rem', borderRadius: 4, marginBottom: '1rem' }}>
-          {error}
-        </div>
-      )}
+        {error && <div className="alert alert-error">{error}</div>}
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '1.25rem' }}>
+            <label className="form-label" htmlFor="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              className="form-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="name@company.com"
+            />
+          </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
-        </div>
+          <div style={{ marginBottom: '2rem' }}>
+            <label className="form-label" htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              className="form-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+              placeholder="••••••••"
+            />
+          </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{ padding: '0.5rem 2rem', cursor: 'pointer' }}
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ width: '100%' }}
+            disabled={loading}
+          >
+            {loading ? 'Authenticating...' : 'Sign In'}
+          </button>
+        </form>
 
-      <p style={{ marginTop: '1rem' }}>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
+        <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+          Don't have an account? <Link to="/register" style={{ fontWeight: 600 }}>Create one</Link>
+        </p>
+      </div>
     </div>
   );
 }

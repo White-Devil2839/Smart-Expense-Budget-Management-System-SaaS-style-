@@ -9,29 +9,30 @@ export default function Navbar() {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '0.75rem 1.5rem',
-      background: '#1e293b',
-      color: '#fff',
+      padding: '1rem 2rem',
+      background: 'rgba(15, 23, 42, 0.8)',
+      backdropFilter: 'blur(12px)',
+      borderBottom: '1px solid var(--border-color)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 100
     }}>
-      <Link to="/dashboard" style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: 'bold' }}>
-        SEBMS
+      <Link to="/dashboard" style={{ color: 'var(--text-main)', textDecoration: 'none', fontSize: '1.4rem', fontWeight: 700 }}>
+        SEB<span className="text-gradient">MS</span>
       </Link>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
-          Role: {role}
-        </span>
-        <button
-          onClick={logout}
-          style={{
-            padding: '0.4rem 1rem',
-            background: '#ef4444',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 4,
-            cursor: 'pointer',
-          }}
-        >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <div style={{ 
+          background: 'rgba(255,255,255,0.05)', 
+          padding: '0.4rem 0.8rem', 
+          borderRadius: '20px',
+          border: '1px solid var(--border-color)',
+          fontSize: '0.8rem', 
+          color: 'var(--text-muted)' 
+        }}>
+          Role: <strong style={{ color: 'var(--accent-primary)' }}>{role}</strong>
+        </div>
+        <button className="btn btn-outline" onClick={logout} style={{ padding: '0.4rem 1rem', fontSize: '0.85rem' }}>
           Logout
         </button>
       </div>

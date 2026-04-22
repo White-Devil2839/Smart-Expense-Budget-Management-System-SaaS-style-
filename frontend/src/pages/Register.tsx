@@ -34,71 +34,71 @@ export default function Register() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '4rem auto' }}>
-      <h2>Register</h2>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
+      <div className="card animate-fade-in" style={{ width: '100%', maxWidth: '420px', padding: '2.5rem', position: 'relative' }}>
+        <Link to="/" style={{ position: 'absolute', top: '1rem', left: '1rem', fontSize: '0.85rem', color: 'var(--text-muted)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          ← Home
+        </Link>
+        <h2 style={{ textAlign: 'center', marginBottom: '2rem', marginTop: '0.5rem' }}>Create Account</h2>
 
-      {error && (
-        <div style={{ color: 'white', background: '#d32f2f', padding: '0.5rem 1rem', borderRadius: 4, marginBottom: '1rem' }}>
-          {error}
-        </div>
-      )}
+        {error && <div className="alert alert-error">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
 
-      {success && (
-        <div style={{ color: 'white', background: '#388e3c', padding: '0.5rem 1rem', borderRadius: 4, marginBottom: '1rem' }}>
-          {success}
-        </div>
-      )}
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '1.25rem' }}>
+            <label className="form-label" htmlFor="name">Full Name</label>
+            <input
+              id="name"
+              type="text"
+              className="form-input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="John Doe"
+            />
+          </div>
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="name">Full Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
-        </div>
+          <div style={{ marginBottom: '1.25rem' }}>
+            <label className="form-label" htmlFor="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              className="form-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="name@company.com"
+            />
+          </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
-        </div>
+          <div style={{ marginBottom: '2rem' }}>
+            <label className="form-label" htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              className="form-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+              placeholder="••••••••"
+            />
+          </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
-        </div>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ width: '100%' }}
+            disabled={loading}
+          >
+            {loading ? 'Creating Account...' : 'Sign Up'}
+          </button>
+        </form>
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{ padding: '0.5rem 2rem', cursor: 'pointer' }}
-        >
-          {loading ? 'Registering...' : 'Register'}
-        </button>
-      </form>
-
-      <p style={{ marginTop: '1rem' }}>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+        <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+          Already have an account? <Link to="/login" style={{ fontWeight: 600 }}>Sign in</Link>
+        </p>
+      </div>
     </div>
   );
 }

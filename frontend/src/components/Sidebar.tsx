@@ -3,16 +3,21 @@ import { useAuth } from '../context/AuthContext';
 
 const linkStyle = {
   display: 'block',
-  padding: '0.6rem 1rem',
+  padding: '0.8rem 1.2rem',
   textDecoration: 'none',
-  color: '#334155',
-  borderRadius: 4,
+  color: 'var(--text-muted)',
+  borderRadius: '8px',
+  transition: 'all 0.2s',
+  marginBottom: '0.5rem',
+  fontWeight: 500
 };
 
 const activeLinkStyle = {
   ...linkStyle,
-  background: '#e2e8f0',
-  fontWeight: 'bold' as const,
+  background: 'rgba(59, 130, 246, 0.1)',
+  color: 'var(--accent-primary)',
+  fontWeight: 600,
+  borderRight: '3px solid var(--accent-primary)'
 };
 
 export default function Sidebar() {
@@ -20,39 +25,27 @@ export default function Sidebar() {
 
   return (
     <aside style={{
-      width: 200,
-      minHeight: 'calc(100vh - 52px)',
-      background: '#f8fafc',
-      borderRight: '1px solid #e2e8f0',
-      padding: '1rem 0.5rem',
+      width: '240px',
+      background: 'rgba(15, 23, 42, 0.5)',
+      backdropFilter: 'blur(12px)',
+      borderRight: '1px solid var(--border-color)',
+      padding: '2rem 1rem',
     }}>
-      <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        <NavLink
-          to="/dashboard"
-          style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}
-        >
+      <nav style={{ display: 'flex', flexDirection: 'column' }}>
+        <NavLink to="/dashboard" style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}>
           📊 Dashboard
         </NavLink>
 
-        <NavLink
-          to="/expenses"
-          style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}
-        >
+        <NavLink to="/expenses" style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}>
           💰 Expenses
         </NavLink>
 
-        <NavLink
-          to="/budgets"
-          style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}
-        >
+        <NavLink to="/budgets" style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}>
           📋 Budgets
         </NavLink>
 
         {role === 'ADMIN' && (
-          <NavLink
-            to="/categories"
-            style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}
-          >
+          <NavLink to="/categories" style={({ isActive }) => isActive ? activeLinkStyle : linkStyle}>
             ⚙️ Categories
           </NavLink>
         )}

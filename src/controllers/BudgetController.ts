@@ -40,4 +40,24 @@ export class BudgetController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async updateBudget(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const { limitAmount } = req.body;
+      if (!limitAmount) {
+        res.status(400).json({ error: 'limitAmount is required' });
+        return;
+      }
+      const updated = await budgetService.updateBudgetLimit(req.userId!, id, limitAmount);
+      res.status(200).json(updated);
+    } catch (error: any) {
+      const status = error.message.includes('not found')
+        ? 404
+        : error.message.includes('Forbidden')
+        ? 403
+        : 500;
+      res.status(status).json({ error: error.message });
+    }
+  }
 }

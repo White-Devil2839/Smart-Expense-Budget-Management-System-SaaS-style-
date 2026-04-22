@@ -62,15 +62,25 @@ export class BudgetService {
     month: string,
     amount: number
   ): Promise<void> {
-    const budget = await budgetRepository.findByUserCategoryMonth(
-      userId,
-      categoryId,
-      month
-    );
+    const budget = await budgetRepository.findByUserCategoryMonth(userId, categoryId, month);
     if (budget) {
       const newSpent = budget.spentAmount + amount;
       await budgetRepository.updateSpent(String(budget._id), newSpent);
     }
     // If no budget set, silently skip (user may not have a budget for this category)
+  }
+
+  async updateBudgetLimit(
+    userId: string,
+    budgetId: string,
+    limitAmount: number
+  ): Promise<IBudget> {
+    const budget = await budgetRepository.findById(budgetId);
+    if (!budget) throw new Error('Budget not found');
+    if (String(budget.userId) !== userId) throw new Error('Forbidden');
+    if (limitAmount <= 0) throw new Error('Limit must be greater than 0');
+    const updated = await budgetRepository.updateLimit(budgetId, limitAmount);
+    if (!updated) throw new Error('Budget not found');
+    return updated;
   }
 }

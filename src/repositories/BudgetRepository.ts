@@ -25,4 +25,12 @@ export class BudgetRepository {
   async updateSpent(id: string, spentAmount: number): Promise<IBudget | null> {
     return Budget.findByIdAndUpdate(id, { spentAmount }, { new: true });
   }
+
+  async findById(id: string): Promise<IBudget | null> {
+    return Budget.findById(id).populate('categoryId', 'name');
+  }
+
+  async updateLimit(id: string, limitAmount: number): Promise<IBudget | null> {
+    return Budget.findByIdAndUpdate(id, { limitAmount }, { new: true }).populate('categoryId', 'name');
+  }
 }
